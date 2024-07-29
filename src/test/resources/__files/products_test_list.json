@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "SKU": "ABC123",
+    "name": "Electronic Watch",
+    "price": 299.99,
+    "type": "NORMAL",
+    "image": "image1.jpg"
+  },
+  {
+    "id": "2",
+    "SKU": "DEF456",
+    "name": "Sports Shoes",
+    "price": 499.6,
+    "type": "NORMAL",
+    "image": "image2.jpg"
+  },
+  {
+    "id": "3",
+    "SKU": "GHI789",
+    "name": "Book \"Exploring the Universe\"",
+    "price": 89,
+    "type": "NORMAL",
+    "image": "image3.jpg"
+  },
+  {
+    "id": "4",
+    "SKU": "JKL012",
+    "name": "Bluetooth Headphones",
+    "price": 199,
+    "type": "HIGH_DEMAND",
+    "image": "image4.jpg"
+  },
+  {
+    "id": "5",
+    "SKU": "MNO345",
+    "name": "Smart Band",
+    "price": 149.45,
+    "type": "HIGH_DEMAND",
+    "image": "image5.jpg"
+  }
+]
