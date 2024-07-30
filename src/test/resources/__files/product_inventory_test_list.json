@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "SKU": "ABC123",
+    "zone": "CN_NORTH",
+    "quantity": 120
+  },
+  {
+    "id": "2",
+    "SKU": "ABC123",
+    "zone": "US_WEST",
+    "quantity": 80
+  },
+  {
+    "id": "3",
+    "SKU": "DEF456",
+    "zone": "EU_CENTRAL",
+    "quantity": 200
+  }
+]
