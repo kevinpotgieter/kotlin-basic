@@ -8,6 +8,7 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import java.math.BigDecimal
 
 
 class ProductRepository(apiBaseUrl: String) : GetProductPort {
@@ -34,7 +35,7 @@ data class ProductDTO(
     val id: Int,
     val SKU: String,
     val name: String,
-    val price: Double,
+    val price: BigDecimal,
     val type: String,
     val image: String
 )
