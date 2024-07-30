@@ -3,10 +3,11 @@ package com.thoughtworks.kotlin_basic.infrastructure.adapters
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock.*
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig
-import com.thoughtworks.kotlin_basic.domain.GetProductsPort
+import com.thoughtworks.kotlin_basic.domain.GetProductPort
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.extensions.wiremock.ListenerMode
 import io.kotest.extensions.wiremock.WireMockListener
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
 
 class ProductsRepositoryTest : FunSpec({
@@ -22,8 +23,10 @@ class ProductsRepositoryTest : FunSpec({
                 )
         )
 
-        val port: GetProductsPort = ProductsRepository(productsServer.baseUrl())
+        val port: GetProductPort = ProductRepository(productsServer.baseUrl())
 
-        assertFalse(port.getAllProducts().isEmpty());
+        val actualProducts = port.getAllProducts()
+        assertFalse(actualProducts.isEmpty())
+        assertEquals(2, actualProducts.size)
     }
 })

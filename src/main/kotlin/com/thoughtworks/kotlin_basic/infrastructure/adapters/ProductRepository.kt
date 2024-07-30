@@ -1,14 +1,15 @@
 package com.thoughtworks.kotlin_basic.infrastructure.adapters
 
-import com.thoughtworks.kotlin_basic.domain.GetProductsPort
+import com.thoughtworks.kotlin_basic.domain.GetProductPort
 import com.thoughtworks.kotlin_basic.domain.Product
+import com.thoughtworks.kotlin_basic.domain.ProductId
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
 
-class ProductsRepository(apiBaseUrl: String) : GetProductsPort {
+class ProductRepository(apiBaseUrl: String) : GetProductPort {
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(apiBaseUrl)
@@ -37,13 +38,13 @@ data class ProductDTO(
     val image: String
 )
 
-class ProductMapper{
+class ProductMapper {
     fun mapToProductList(dto: List<ProductDTO>): List<Product> {
         return dto.map { mapToProduct(it) }
     }
 
     private fun mapToProduct(dto: ProductDTO): Product {
-        return Product(dto.name, dto.SKU, dto.price, dto.type)
+        return Product(ProductId(dto.SKU), dto.name, dto.price, dto.type)
     }
 }
 

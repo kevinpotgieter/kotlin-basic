@@ -1,6 +1,6 @@
 package com.thoughtworks.kotlin_basic.domain
 
-interface GetProductsPort {
+interface GetProductPort {
 
     fun getAllProducts(): List<Product>;
 }
