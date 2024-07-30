@@ -51,6 +51,18 @@ class ProductAggregateTest : FunSpec({
         productWithPrice.price shouldBeEqual BigDecimal("844.34")
     }
 
+    test("Ensure that the quantity returned is the quantity for the product in question"){
+        val testProduct: Product = createTestProduct("HIGH_DEMAND", BigDecimal("562.89"))
+        val productStockLevels: List<ProductStock> = listOf(
+            createTestProductStockLevel(testProduct.productId, 8),
+            createTestProductStockLevel(testProduct.productId, 22),
+            createTestProductStockLevel(ProductId(randomStringForTest()), 100)
+        )
+
+        val result = ProductAggregate(testProduct, productStockLevels)
+        result.quantity shouldBeEqual 30
+    }
+
 })
 
 private fun createTestProduct(productDemandType: String, basePrice: BigDecimal = BigDecimal("123.97")): Product {

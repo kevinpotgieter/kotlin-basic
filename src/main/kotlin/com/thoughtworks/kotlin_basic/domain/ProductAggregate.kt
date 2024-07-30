@@ -12,12 +12,10 @@ class ProductAggregate(private val product: Product, private val productStock: L
         get() = product.name
 
     val price: BigDecimal
-        get() = calculatePrice()
+        get() = product.calculatePrice(this.quantity)
 
-    private fun calculatePrice(): BigDecimal {
-        val productStockLevel = getStockLevelFor(product.productId)
-        return product.calculatePrice(productStockLevel)
-    }
+    val quantity: Int
+        get() = getStockLevelFor(productId)
 
     private fun getStockLevelFor(productId: ProductId): Int {
         return productStock.filter { it.productId == productId }.sumOf { it.quantity }
