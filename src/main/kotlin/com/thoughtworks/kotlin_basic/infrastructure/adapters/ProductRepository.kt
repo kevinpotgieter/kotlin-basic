@@ -3,6 +3,7 @@ package com.thoughtworks.kotlin_basic.infrastructure.adapters
 import com.thoughtworks.kotlin_basic.domain.GetProductPort
 import com.thoughtworks.kotlin_basic.domain.Product
 import com.thoughtworks.kotlin_basic.domain.ProductId
+import com.thoughtworks.kotlin_basic.infrastructure.common.Mapper
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -20,7 +21,7 @@ class ProductRepository(apiBaseUrl: String) : GetProductPort {
     private val mapper: ProductMapper = ProductMapper()
 
     override fun getAllProducts(): List<Product> {
-        return mapper.mapToProductList(productService.getAllProducts().execute().body() ?: emptyList())
+        return mapper.mapTo(productService.getAllProducts().execute().body() ?: emptyList())
     }
 }
 
@@ -38,12 +39,12 @@ data class ProductDTO(
     val image: String
 )
 
-class ProductMapper {
-    fun mapToProductList(dto: List<ProductDTO>): List<Product> {
-        return dto.map { mapToProduct(it) }
+class ProductMapper : Mapper<ProductDTO, Product> {
+    override fun mapTo(dto: List<ProductDTO>): List<Product> {
+        return dto.map { mapTo(it) }
     }
 
-    private fun mapToProduct(dto: ProductDTO): Product {
+    override fun mapTo(dto: ProductDTO): Product {
         return Product(ProductId(dto.SKU), dto.name, dto.price, dto.type)
     }
 }
