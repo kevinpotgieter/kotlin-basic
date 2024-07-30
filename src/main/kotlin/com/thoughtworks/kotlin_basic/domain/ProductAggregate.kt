@@ -2,7 +2,7 @@ package com.thoughtworks.kotlin_basic.domain
 
 import java.math.BigDecimal
 
-class ProductAggregate(private val product: Product, productStock: List<ProductStock>) {
+class ProductAggregate(private val product: Product, private val productStock: List<ProductStock>) {
 
     val productId: ProductId
         get() = product.productId
@@ -15,6 +15,11 @@ class ProductAggregate(private val product: Product, productStock: List<ProductS
         get() = calculatePrice()
 
     private fun calculatePrice(): BigDecimal {
-        return product.basePrice
+        val productStockLevel = getStockLevelFor(product.productId)
+        return product.calculatePrice(productStockLevel)
+    }
+
+    private fun getStockLevelFor(productId: ProductId): Int {
+        return productStock.filter { it.productId == productId }.sumOf { it.quantity }
     }
 }
